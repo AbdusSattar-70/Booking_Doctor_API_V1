@@ -85,4 +85,4 @@ production:
   <<: *default
   database: appoint_doctor_backend_production
   username: appoint_doctor_backend
-  password: <%= ENV["APPOINT_DOCTOR_BACKEND_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_URL"] %>
