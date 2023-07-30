@@ -1,4 +1,3 @@
-# app/controllers/users/registrations_controller.rb
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params
   respond_to :json
