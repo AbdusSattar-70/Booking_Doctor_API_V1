@@ -14,18 +14,17 @@ class User < ApplicationRecord
 
   validates :name, :email, :photo, :age, :role, :address, presence: true
   validates :password, :password_confirmation, presence: true, length: { minimum: 6 }
-  # validates :qualification, :description, :experiences, :available_from, :available_to, :consultation_fee, :rating, :specialization, presence: true, if: :doctor?
 
   ROLES = %w[super_admin admin doctor patient general].freeze
 
   ROLES.each do |role_name|
     define_method "#{role_name}?" do
-      role = role_name
+      role_name == role
     end
   end
 
   def appointments
-   case role
+    case role
     when 'doctor'
       doctor_appointments
     when 'patient'
@@ -35,8 +34,8 @@ class User < ApplicationRecord
     end
   end
 
-  def jwt_payload
-    super
+  def valid_name?(name)
+    self.name == name
   end
 
   private
@@ -44,5 +43,4 @@ class User < ApplicationRecord
   def downcase_role
     self.role = role.downcase
   end
-
 end

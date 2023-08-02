@@ -65,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                         :password, :password_confirmation,
                                         { address: %i[street city state zip_code] }
                                       ])
-                                      end
+  end
 
   def doctor_params
     params.require(:user).permit(
@@ -83,5 +83,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
       address: %i[street city state zip_code]
     )
   end
-
 end
