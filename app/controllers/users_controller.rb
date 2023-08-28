@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i{create destroy}
+  before_action :authenticate_user!, only: %i[create destroy]
 
   # GET /users
   def index
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     if @user.nil?
       render json: { message: 'Not Found', data: { code: 401 } }, status: :not_found
     else
-        authorize_super_admin_or_admin
+      authorize_super_admin_or_admin
       begin
         @user.destroy
         head :no_content
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def authorize_super_admin_or_admin
-     return if current_user.super_admin? || current_user.admin?
+    return if current_user.super_admin? || current_user.admin?
 
     render json: { error: 'Unauthorized' }, status: :unauthorized
   end
